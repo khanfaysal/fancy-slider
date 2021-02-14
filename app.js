@@ -29,10 +29,12 @@ const showImages = (images) => {
 }
 
 const getImages = (query) => {
+  toggleSpinner();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
+    
 }
 
 let slideIndex = 0;
@@ -52,23 +54,10 @@ const selectItem = (event, img) => {
 }
 var timer;
  const createSlider = () => {
-//   // check slider image length and duration
-  // let msg = '';
-  // if(sliders.length < 2){
-  //   msg = 'Select at least two images.';
-  // }
-  // else if(doration < 0){
-  //   msg = 'Duration negative value not allowed';
-  // }
-  // else if(doration == 0){
-  //   msg = 'Duration must be set and input will be number';
-  // }
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
     return;
   };
-  
-  
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -142,3 +131,9 @@ document.getElementById('search').addEventListener('keypress',function(event){
     document.getElementById('search-btn').click();
   }
 });
+
+const toggleSpinner = () =>{
+  const spinner = document.getElementById('loading-spinner');
+   spinner.classList.remove('d-none');
+  // console.log(spinner.classList);
+}

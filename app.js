@@ -16,6 +16,7 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 // show images 
 const showImages = (images) => {
   imagesArea.style.display = 'block';
+  loading();
   gallery.innerHTML = '';
   // show gallery title
   galleryHeader.style.display = 'flex';
@@ -23,13 +24,14 @@ const showImages = (images) => {
     let div = document.createElement('div');
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div)
+    gallery.appendChild(div);
+    // toggleSpinner(false);
   })
 
 }
 
 const getImages = (query) => {
-  toggleSpinner();
+  // toggleSpinner(true);
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -119,6 +121,7 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
+  loading();
 })
 
 sliderBtn.addEventListener('click', function () {
@@ -132,8 +135,22 @@ document.getElementById('search').addEventListener('keypress',function(event){
   }
 });
 
-const toggleSpinner = () =>{
-  const spinner = document.getElementById('loading-spinner');
-   spinner.classList.remove('d-none');
-  // console.log(spinner.classList);
-}
+// const toggleSpinner = (show) =>{
+//   const spinner = document.getElementById('loading-spinner');
+//   if(show){
+//     spinner.classList.remove('d-none');
+//   }
+//   else{
+//     spinner.classList.add('d-none');
+//   }
+   
+   
+//   //  console.log(spinner.classList);
+// }
+
+const loading = () => {
+  const load = document.getElementById('loading-spinner').classList;
+  const images = document.getElementById('images').classList;
+  load.toggle('d-none');
+  images.toggle('d-none');
+};

@@ -16,7 +16,7 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 // show images 
 const showImages = (images) => {
   imagesArea.style.display = 'block';
-  loading();
+  loadingSpinner();
   gallery.innerHTML = '';
   // show gallery title
   galleryHeader.style.display = 'flex';
@@ -121,7 +121,7 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
-  loading();
+  loadingSpinner();
 })
 
 sliderBtn.addEventListener('click', function () {
@@ -148,9 +148,9 @@ document.getElementById('search').addEventListener('keypress',function(event){
 //   //  console.log(spinner.classList);
 // }
 
-const loading = () => {
-  const load = document.getElementById('loading-spinner').classList;
-  const images = document.getElementById('images').classList;
-  load.toggle('d-none');
-  images.toggle('d-none');
+const loadingSpinner = () => {
+  const spinnerLoad = document.getElementById('loading-spinner').classList;
+  const spinnerImages = document.getElementById('images').classList;
+  spinnerLoad.toggle('d-none');
+  spinnerImages.toggle('d-none');
 };

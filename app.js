@@ -46,32 +46,29 @@ const selectItem = (event, img) => {
     // console.log(sliders.push(img));
   } else {
     let imgRemove = sliders.indexOf(img);
-    console.log(imgRemove);
+    // console.log(imgRemove);
     sliders.splice(imgRemove,1);
   }
 }
 var timer;
  const createSlider = () => {
 //   // check slider image length and duration
-  let msg = '';
-  if(sliders.length < 2){
-    msg = 'Select at least two images.';
-  }
-  else if(duration < 0){
-    msg = 'Duration negative value not allowed';
-  }
-  else if(duration == 0){
-    msg = 'Duration must be set and input will be number';
-  }
-  return;
-  // if(msg !== '' ){
-  //   alert('msg')
-  //   return
+  // let msg = '';
+  // if(sliders.length < 2){
+  //   msg = 'Select at least two images.';
   // }
-  // if (sliders.length < 2) {
-  //   alert('Select at least 2 image.')
-  //   return;
+  // else if(doration < 0){
+  //   msg = 'Duration negative value not allowed';
   // }
+  // else if(doration == 0){
+  //   msg = 'Duration must be set and input will be number';
+  // }
+  if (sliders.length < 2) {
+    alert('Select at least 2 image.')
+    return;
+  };
+  
+  
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -85,7 +82,7 @@ var timer;
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('doration').value || 1000;
+  const duration = Math.abs(document.getElementById('doration').value) || 1000;
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";

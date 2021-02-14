@@ -32,7 +32,7 @@ const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
-    // .catch(err => console.log(err))
+    .catch(err => console.log(err))
 }
 
 let slideIndex = 0;
@@ -42,18 +42,36 @@ const selectItem = (event, img) => {
  
   let item = sliders.indexOf(img);
   if (item === -1) {
-    sliders.push(img);
+     sliders.push(img);
+    // console.log(sliders.push(img));
   } else {
-    alert('Hey, Already added !')
+    let imgRemove = sliders.indexOf(img);
+    console.log(imgRemove);
+    sliders.splice(imgRemove,1);
   }
 }
-var timer = 1;
-const createSlider = () => {
-  // check slider image length
-  if (sliders.length < 2) {
-    alert('Select at least 2 image.')
-    return;
+var timer;
+ const createSlider = () => {
+//   // check slider image length and duration
+  let msg = '';
+  if(sliders.length < 2){
+    msg = 'Select at least two images.';
   }
+  else if(duration < 0){
+    msg = 'Duration negative value not allowed';
+  }
+  else if(duration == 0){
+    msg = 'Duration must be set and input will be number';
+  }
+  return;
+  // if(msg !== '' ){
+  //   alert('msg')
+  //   return
+  // }
+  // if (sliders.length < 2) {
+  //   alert('Select at least 2 image.')
+  //   return;
+  // }
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -121,8 +139,7 @@ sliderBtn.addEventListener('click', function () {
   createSlider()
 })
 
-// Custom js code 
-// Press enter and show image
+// Enter key img
 document.getElementById('search').addEventListener('keypress',function(event){
   if(event.keyCode == 13){
     document.getElementById('search-btn').click();
